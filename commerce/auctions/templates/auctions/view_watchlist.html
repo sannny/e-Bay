@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h4>
+        My Watch List
+    </h4>
+    <ul> 
+        {% for listing in listings %}
+            <li>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{listing.prod_id.prod_name}}</h5>
+                    <p class="card-text">{{listing.prod_id.description}}</p>
+                    </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> $ {{listing.prod_id.amount}}</li>
+                            <li class="list-group-item">ends on {{listing.prod_id.end_date}}</li>
+                            <li class="list-group-item">Active: {{listing.prod_id.active}}</li>
+                        </ul>
+                    <div class="card-body">
+                    <a href="{% url 'Prod_page' listing.prod_id.prod_id %} " class="card-link">Bid Now</a>
+                    </div>
+                </div>
+            </li>
+        {% empty %}
+            <li>Sorry, no item in your watch list</li>
+        {% endfor %}
+    </ul>    
+{% endblock %}

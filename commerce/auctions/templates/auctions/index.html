@@ -1,0 +1,33 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {%if message %}
+        <h5>{{message}}</h5>
+    {% endif %}
+    <ul>
+        
+        {% for listing in listings%}
+            <li>
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                    <h5 class="card-title">{{listing.prod_name}}</h5>
+                    <p class="card-text">{{listing.description}}</p>
+                    </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> $ {{listing.amount}}</li>
+                            <li class="list-group-item">ends on {{listing.end_date}}</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                        </ul>
+                    <div class="card-body">
+                    <a href="{% url 'Prod_page' listing.prod_id %}" class="card-link">Bid Now</a>
+                    <a href="{% url 'add_to_watchList' listing.prod_id %}" class="card-link">Add to WatchList</a>
+                    </div>
+                </div>
+            </li>
+        {% empty %}
+            <li>Sorry, no active listing</li>
+        {% endfor %}
+    </ul>    
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+    <div>{{ message }}</div>
+    {% endif %}
+    <form action="{% url 'add_product' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="name" placeholder="Name of the product">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="Description" placeholder="Description">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="image_link" placeholder="Insert Image link">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="number" name="price" placeholder="starting amount">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="date" name="end_date" placeholder="end_date">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+{% endblock %}

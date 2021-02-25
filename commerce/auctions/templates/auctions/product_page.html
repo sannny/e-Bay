@@ -1,0 +1,69 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div>
+        <div>
+            <h3>{{prod_ob.prod_name}}</h3>
+        </div>
+        <div>
+            <h5>$ {{prod_ob.amount}}</h5>
+        </div>
+        <div>
+            <p>{{prod_ob.description}}</p>
+        </div>
+        <div>
+            <p>Post date : {{prod_ob.post_date}}</p>
+        </div>
+        <div>
+            <p> End date : {{prod_ob.end_date}}</p>
+        </div>
+        <div>
+            <form action="{% url 'Prod_page' prod_ob.prod_id %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    {% if message %}
+                        <h5>{{message}}</h5>
+                    {% endif %}
+                </div>
+                <div>
+                    <input type="number" name="amt" placeholder="Bid amount">
+                </div>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Bid Now">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <div>
+            <h4> Reviews</h4>
+            <form action="{% url 'Prod_page' prod_ob.prod_id  %}" method="POST">
+                {% csrf_token %}
+                <div>
+                    <input type="text" name="comment" placeholder="Type your comment in here...">
+                </div>
+                <input class="btn btn-primary" type="submit" value="comment">
+            </form>
+        </div>
+        <div>
+            <ul>
+                {% for comment in comments%}
+                    <li>
+                        <div>
+                            <h6>{{comment.commenter_id.username}}</h6>
+                        </div>
+                        <div>
+                            <p>{{comment.comment_date}}</p>
+                        </div>
+                        <div>
+                            <p>{{comment.message}}</p>
+                        </div>
+                    </li>
+                {%empty%}
+                <li>No reiews for this product</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
